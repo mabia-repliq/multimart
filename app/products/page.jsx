@@ -90,8 +90,6 @@ export default function Products() {
             className={`border text-teal-700 border-teal-100 cursor-pointer shadow mx-1 mb-2 p-3 font-bold rounded-md  ${
               active === true ? "bg-teal-700 text-white" : "bg-white"
             }`}
-            // category.name ? "bg-teal-200" : "bg-white"
-
             key={category.id}
             onClick={() => handleTabClick(category.name)}
           >

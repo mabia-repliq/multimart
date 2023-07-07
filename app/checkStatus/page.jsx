@@ -95,12 +95,11 @@ const statusNames = [
 const ProductStatus = () => {
   const [statuses, setStatuses] = useState(productData);
   const filterStatus = item => {
-    const res = productData.filter(data => {
+    const result = productData.filter(data => {
       return data.status === item;
     });
-    setStatuses(res);
+    setStatuses(result);
   };
-
   return (
     <div className="mt-20">
       <h1 className="flex flex-row justify-center mt-28 mb-8 text-3xl text-teal-700 font-bold text-center">
@@ -125,7 +124,8 @@ const ProductStatus = () => {
       <div className="mt-12 border-b mx-16 flex flex-wrap">
         {statusNames?.map(statusName => (
           <p
-            className="text-teal-700 cursor-pointer border-b-teal-100 mx-1 mb-2 p-3 font-bold rounded-md"
+            className={`text-teal-700 cursor-pointer border-b-teal-100 mx-1 mb-2 p-3 font-bold rounded-md
+             ${statuses[0].status === statusName.name && "bg-red-200"}`}
             key={statusName.id}
             onClick={() => filterStatus(statusName.name)}
           >
