@@ -24,7 +24,7 @@ export default function Products() {
   const [params, setParams] = useState("");
   const [category, setCategory] = useState("");
   const [product, setProduct] = useState([]);
-  const [active, setActive] = useState(`${categories.id}`);
+  const [active, setActive] = useState(false);
 
   const fetchProducts = () => {
     if (params || category) {
@@ -49,8 +49,8 @@ export default function Products() {
     refetch();
   }, [params, category]);
 
-  const handleTabClick = (tabName, toggleId) => {
-    setActive(toggleId);
+  const handleTabClick = tabName => {
+    setActive(!active);
     setCategory(tabName);
     fetchProducts();
   };
@@ -86,17 +86,17 @@ export default function Products() {
       {/* tabs section */}
       <div className="mx-16 flex flex-wrap">
         {categories.map(category => (
-          <button
-            className={`border text-teal-700 border-teal-100 shadow mx-1 mb-2 p-3 font-bold rounded-md  ${
+          <p
+            className={`border text-teal-700 border-teal-100 cursor-pointer shadow mx-1 mb-2 p-3 font-bold rounded-md  ${
               active === true ? "bg-teal-700 text-white" : "bg-white"
             }`}
             // category.name ? "bg-teal-200" : "bg-white"
 
             key={category.id}
-            onClick={() => handleTabClick(`category.name, ${category.id}`)}
+            onClick={() => handleTabClick(category.name)}
           >
             {category.name}
-          </button>
+          </p>
         ))}
       </div>
       {/* tabs */}
