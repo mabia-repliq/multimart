@@ -22,17 +22,16 @@ const categories = [
 
 export default function Products() {
   const [params, setParams] = useState("");
-  const [category, setCategory] = useState("");
+  const [productCategory, setProductCategory] = useState("");
   const [product, setProduct] = useState([]);
-  const [active, setActive] = useState(false);
 
   const fetchProducts = () => {
-    if (params || category) {
+    if (params || productCategory) {
       return params
         ? fetch(`https://dummyjson.com/products/search?q=${params}`)
             .then(res => res.json())
             .then(data => setProduct(data))
-        : fetch(`https://dummyjson.com/products/category/${category}`)
+        : fetch(`https://dummyjson.com/products/category/${productCategory}`)
             .then(res => res.json())
             .then(data => setProduct(data));
     }
@@ -41,19 +40,19 @@ export default function Products() {
       .then(data => setProduct(data));
   };
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["products", params, category],
+    queryKey: ["products", params, productCategory],
     queryFn: () => fetchProducts(),
   });
 
   useEffect(() => {
     refetch();
-  }, [params, category]);
+  }, [params, productCategory]);
 
   const handleTabClick = tabName => {
-    setActive(!active);
-    setCategory(tabName);
+    setProductCategory(tabName);
     fetchProducts();
   };
+  console.log(productCategory);
 
   if (isLoading && data) {
     return (
@@ -87,8 +86,8 @@ export default function Products() {
       <div className="mx-16 flex flex-wrap">
         {categories.map(category => (
           <p
-            className={`border text-teal-700 border-teal-100 cursor-pointer shadow mx-1 mb-2 p-3 font-bold rounded-md  ${
-              active === true ? "bg-teal-700 text-white" : "bg-white"
+            className={`text-teal-700 cursor-pointer mx-1 mb-2 p-3 font-bold ${
+              productCategory === category.name && "border-b-2 border-teal-700"
             }`}
             key={category.id}
             onClick={() => handleTabClick(category.name)}
