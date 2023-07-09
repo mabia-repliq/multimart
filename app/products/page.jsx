@@ -81,7 +81,6 @@ export default function Products() {
           />
         </svg>
       </h1>
-
       {/* tabs section */}
       <div className="mx-16 flex flex-wrap">
         {categories.map(category => (
@@ -97,9 +96,8 @@ export default function Products() {
         ))}
       </div>
       {/* tabs */}
-
       {/* Search products button */}
-      <div className="w-auto mx-16 mt-6 mb-6 px-1">
+      <div className="w-1/2 mx-16 mt-6 mb-6 px-1">
         <InputField
           name="searchProduct"
           id="searchProduct"
@@ -111,13 +109,18 @@ export default function Products() {
           }}
         />
       </div>
-
       {/* products section */}
+      {/* {params ? ( */}
       <div className="mx-16 mb-12 grid w-auto sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
         {product?.products?.map(product => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
+      {/* ) : (
+        <div className="mt-20 text-gray-600 text-xl text-center">
+          <p>Sorry! Product Not found</p>
+        </div>
+      )} */}
     </div>
   );
 }
